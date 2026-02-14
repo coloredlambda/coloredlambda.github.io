@@ -1,0 +1,388 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">RAAJ // PROFILE</title>
+    <style vid="5">
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --accent-color: #ff0000;
+            --border-color: #e0e0e0;
+            --font-mono: 'Courier New', Courier, monospace;
+            --max-width: 800px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0a0a0a;
+                --text-color: #e0e0e0;
+                --accent-color: #ff3333;
+                --border-color: #2a2a2a;
+            }
+        }
+
+        /* Manual overrides */
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --accent-color: #ff0000;
+            --border-color: #e0e0e0;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --accent-color: #ff3333;
+            --border-color: #2a2a2a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 80px 40px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom: 1px solid var(--text-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .name-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header-meta {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+        }
+
+        .meta-stamp {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+            font-size: 11px;
+            opacity: 0.6;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 40px 0;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        
+        .visual-separator {
+            width: 20px;
+            height: 1px;
+            background-color: var(--text-color);
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .u-red {
+            color: var(--accent-color);
+        }
+
+        
+        .status-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .now-playing {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            width: fit-content;
+            font-size: 11px;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+
+        .album-art {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-indicator {
+            text-transform: uppercase;
+            font-size: 9px;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pulse {
+            width: 4px;
+            height: 4px;
+            background: #1DB954; 
+            border-radius: 50%;
+        }
+
+        .track-name {
+            font-weight: 700;
+        }
+
+        .artist-name {
+            opacity: 0.7;
+        }
+
+        footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ref-id {
+            font-size: 10px;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 600px) {
+            .header-top {
+                flex-direction: column;
+                gap: 20px;
+            }
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 40px;
+            }
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 2px 6px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .weather-info {
+            font-size: 10px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body vid="6">
+
+    <div class="container" vid="7">
+        <header vid="8">
+            <div class="header-top" vid="9">
+                <h1 class="name-title" vid="10">
+                    RAAJ AHIABLE
+                </h1>
+                <div class="header-meta" vid="11">
+                    <div class="meta-stamp" vid="12">
+                        <div id="weather" class="weather-info">WTHR: LOADING...</div>
+                        <button id="theme-toggle" class="theme-toggle" vid="theme-btn">[ THEME ]</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="intro-text" vid="16">
+                I am a Software Engineer and Partner at <a href="https://globaliconsagency.com" target="_blank">Global Icons</a>, a software engineering startup in Accra, Ghana, where I lead our engineering team. My work is centered on architecting and delivering large-scale <span class="u-red" vid="17">distributed systems</span> for complex, high-stakes environments. Over the past few years, we have shipped a number of important systems nationwide.
+            </div>
+
+            <div class="status-container">
+                <div class="now-playing" vid="18">
+                    <div class="album-art" vid="19">
+                        <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&amp;fit=crop&amp;q=80&amp;w=40&amp;h=40" alt="Album Art" vid="20">
+                    </div>
+                    <div class="track-info" vid="21">
+                        <div class="status-indicator" vid="22"><span class="pulse" vid="23"></span> Now Listening</div>
+                        <div class="track-name" vid="24">Pulse Modulator</div>
+                        <div class="artist-name" vid="25">Carbon Based Lifeforms</div>
+                    </div>
+                </div>
+
+                <div class="now-playing" vid="gaming-status">
+                    <div class="album-art" vid="game-art">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&amp;fit=crop&amp;q=80&amp;w=40&amp;h=40" alt="Game Art" vid="game-img">
+                    </div>
+                    <div class="track-info" vid="game-info">
+                        <div class="status-indicator" vid="game-status-ind"><span class="pulse" style="background: #ff0000;" vid="game-pulse"></span> Now Playing</div>
+                        <div class="track-name" vid="game-name">Aces of Thunder</div>
+                        <div class="artist-name" vid="game-platform">Flight Simulator</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <hr vid="26">
+
+        <section vid="27">
+            <div class="visual-separator" vid="28"></div>
+            <p vid="29" style="max-width: 600px; margin-bottom: 20px;">
+                Outside of work, I have a strong interest in history and archaeology. Recently, this has grown into a specific focus on World War era aircraft and the tactics of aerial combat. I am an avid gamer and currently spend a lot of my time in the flight simulation community, specifically flying vintage fighter planes in Aces of Thunder. I have a long-term goal of eventually transitioning from flight simulators to piloting a Cessna in the real world.
+            </p>
+        </section>
+
+        <hr vid="30">
+
+        <footer class="footer" vid="21">
+            <div class="ref-id" vid="22">REF: 0X-F2-99-A1</div>
+            <div class="loc-meta" style="font-size: 9px; opacity: 0.6; margin-top: 4px;">LOC: 5.6037° N, 0.1870° W</div>
+            <div class="contact-links" vid="23">
+                <a href="mailto:raaj@ahiable.com" vid="24">/EMAIL</a>
+                <a href="https://github.com/coloredlambda" vid="25">/GITHUB</a>
+                <a href="#" vid="26">/LINKEDIN</a>
+            </div>
+        </footer>
+    </div>
+
+    <script vid="script-logic">
+        // Theme Logic
+        const toggleBtn = document.getElementById('theme-toggle');
+        
+        function applyTheme(theme) {
+            if (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+        }
+
+        // Initialize from localStorage (manual override)
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            applyTheme(storedTheme);
+        }
+
+        // Manual toggle logic
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            let newTheme;
+            if (!currentTheme) {
+                // Currently following system, switch to the opposite of system
+                newTheme = systemIsDark ? 'light' : 'dark';
+            } else {
+                // Manually overridden, switch to the other manual theme
+                newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            }
+            
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Weather Logic (Accra, Ghana)
+        async function fetchWeather() {
+            const weatherDiv = document.getElementById('weather');
+            try {
+                // Using wttr.in for a simple, no-key-required weather API
+                // Adding ?m for metric units (Celsius)
+                const response = await fetch('https://wttr.in/Accra?m&format=%t+%C');
+                if (response.ok) {
+                    const data = await response.text();
+                    weatherDiv.innerText = `WTHR: ${data.toUpperCase()}`;
+                } else {
+                    weatherDiv.innerText = 'WTHR: UNAVAILABLE';
+                }
+            } catch (error) {
+                weatherDiv.innerText = 'WTHR: OFFLINE';
+            }
+        }
+
+        fetchWeather();
+    </script>
+</body></html>
