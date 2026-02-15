@@ -283,14 +283,14 @@
             </div>
 
             <div class="status-container">
-                <div class="now-playing" vid="18">
+                <div class="now-playing" id="music-container" vid="18">
                     <div class="album-art" vid="19">
-                        <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&amp;fit=crop&amp;q=80&amp;w=40&amp;h=40" alt="Album Art" vid="20">
+                        <img id="music-art" src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&amp;fit=crop&amp;q=80&amp;w=40&amp;h=40" alt="Album Art" vid="20">
                     </div>
                     <div class="track-info" vid="21">
-                        <div class="status-indicator" vid="22"><span class="pulse" vid="23"></span> Now Listening</div>
-                        <div class="track-name" vid="24">Pulse Modulator</div>
-                        <div class="artist-name" vid="25">Carbon Based Lifeforms</div>
+                        <div class="status-indicator" id="music-status" vid="22"><span class="pulse" id="music-pulse" vid="23"></span> Now Listening</div>
+                        <div class="track-name" id="track-name" vid="24">STATION_SILENT</div>
+                        <div class="artist-name" id="artist-name" vid="25">WAITING_FOR_DATA</div>
                     </div>
                 </div>
 
@@ -384,5 +384,41 @@
         }
 
         fetchWeather();
+
+        // Music Logic (Proxy via Render)
+        const PROXY_URL = 'https://raaj-music-proxy.onrender.com/api/now-playing'; // Update this once deployed
+
+        async function fetchNowPlaying() {
+            const trackName = document.getElementById('track-name');
+            const artistName = document.getElementById('artist-name');
+            const musicArt = document.getElementById('music-art');
+            const musicPulse = document.getElementById('music-pulse');
+            const musicStatus = document.getElementById('music-status');
+
+            try {
+                const response = await fetch(PROXY_URL);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    trackName.innerText = data.name.toUpperCase();
+                    artistName.innerText = data.artist.toUpperCase();
+                    if (data.image) musicArt.src = data.image;
+                    
+                    if (data.nowPlaying) {
+                        musicPulse.style.display = 'inline-block';
+                        musicStatus.innerHTML = '<span class="pulse" id="music-pulse"></span> NOW LISTENING';
+                    } else {
+                        musicPulse.style.display = 'none';
+                        musicStatus.innerText = 'LAST PLAYED';
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching music data:', error);
+            }
+        }
+
+        fetchNowPlaying();
+        // Refresh every 30 seconds
+        setInterval(fetchNowPlaying, 30000);
     </script>
 </body></html>
