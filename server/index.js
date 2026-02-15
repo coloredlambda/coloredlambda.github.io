@@ -26,14 +26,27 @@ app.get('/api/now-playing', async (req, res) => {
             return res.status(400).json({ error: data.message });
         }
 
-        const track = data.recenttracks.track[0];
+        const tracks = data.recenttracks && data.recenttracks.track;
+
+        if (!tracks || tracks.length === 0) {
+            return res.json({
+                name: 'STATION_SILENT',
+                artist: 'NO_RECENT_TRACKS',
+                album: '',
+                image: '',
+                url: '',
+                nowPlaying: false
+            });
+        }
+
+        const track = tracks[0];
         const isNowPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
 
         res.json({
             name: track.name,
             artist: track.artist['#text'],
-            album: track.album['#text'],
-            image: track.image[track.image.length - 1]['#text'], // Use largest image
+            album: track.album['#text'] || '',
+            image: (track.image && track.image.length > 0) ? track.image[track.image.length - 1]['#text'] : '',
             url: track.url,
             nowPlaying: isNowPlaying
         });
