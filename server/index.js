@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 // Last.fm Configuration
 const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
+const LASTFM_API_SECRET = process.env.LASTFM_API_SECRET; // Optional for read-only calls
 const LASTFM_USER = 'raajay';
 const LASTFM_ENDPOINT = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&limit=1&format=json`;
 
@@ -20,7 +21,7 @@ app.get('/api/now-playing', async (req, res) => {
     try {
         const response = await fetch(LASTFM_ENDPOINT);
         const data = await response.json();
-        
+
         if (data.error) {
             return res.status(400).json({ error: data.message });
         }
