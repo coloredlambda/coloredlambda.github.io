@@ -1,339 +1,911 @@
-<html lang="en" vid="0"><head vid="1">
+<html vid="0"><head vid="1">
     <meta charset="UTF-8" vid="2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
-    <title vid="4">RAAJ // PROFILE</title>
-    <style vid="5">
+    <title vid="4">Raaj Ahiable - Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600&amp;family=Mrs+Saint+Delafield&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet" vid="7">
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="8"></script>
+    <style vid="9">
         :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --accent-color: #ff0000;
-            --border-color: #e0e0e0;
-            --font-mono: 'Courier New', Courier, monospace;
-            --max-width: 800px;
+            --beige-light: #ffffff;
+            --beige-main: #f4f4f4;
+            --beige-dark: #e0e0e0;
+            --beige-shadow: #c0c0c0;
+            --screen-black: #000000;
+            --accent-blue: #000;
+            --ink-black: #000000;
+            
+            --font-serif: 'Bodoni Moda', serif;
+            --font-script: 'Mrs Saint Delafield', cursive;
+            --font-mono: 'Space Mono', monospace;
+            
+            
+            --gradient-sim: linear-gradient(180deg, #87CEEB 50%, #556B2F 50%);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-color: #0a0a0a;
-                --text-color: #e0e0e0;
-                --accent-color: #ff3333;
-                --border-color: #2a2a2a;
-            }
-        }
-
-        /* Manual overrides */
-        [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --accent-color: #ff0000;
-            --border-color: #e0e0e0;
-        }
-
+        /* Dark mode overrides */
         [data-theme="dark"] {
-            --bg-color: #0a0a0a;
-            --text-color: #e0e0e0;
-            --accent-color: #ff3333;
-            --border-color: #2a2a2a;
+            --beige-light: #2a2a2a;
+            --beige-main: #222222;
+            --beige-dark: #1a1a1a;
+            --beige-shadow: #000000;
+            --screen-black: #000;
+            --ink-black: #f4f4f4;
+            background-color: #000;
+        }
+        
+        [data-theme="dark"] body {
+            background-color: #000;
+            color: #f4f4f4;
+        }
+
+        [data-theme="dark"] .front, [data-theme="dark"] .top, [data-theme="dark"] .kb-base {
+            background: #222;
+            border-color: #444;
+            box-shadow: 0 0 20px rgba(255,255,255,0.05);
+        }
+        
+        [data-theme="dark"] .face, [data-theme="dark"] .key, [data-theme="dark"] .btn, [data-theme="dark"] .window-music, [data-theme="dark"] .sticker-text {
+            background: #222;
+            color: #f4f4f4;
+            border-color: #444;
+        }
+
+        [data-theme="dark"] .left { background: #1a1a1a; border-color: #444; }
+        [data-theme="dark"] .right { background: #151515; border-color: #444; }
+        [data-theme="dark"] .back { background: #111; border-color: #444; }
+
+        [data-theme="dark"] .vent {
+            background: #000;
+            border: 1px solid #333;
+        }
+
+        [data-theme="dark"] .floppy-slot {
+            background: #000;
+            border: 1px solid #333;
+        }
+
+        [data-theme="dark"] .btn, [data-theme="dark"] .window-music, [data-theme="dark"] .key {
+            box-shadow: 4px 4px 0 #f4f4f4;
+        }
+
+        [data-theme="dark"] h1, [data-theme="dark"] p.lead, [data-theme="dark"] .spec-item h4 {
+            color: #f4f4f4;
+            border-color: #f4f4f4;
+        }
+
+        [data-theme="dark"] .win-title {
+            background: #f4f4f4;
+            color: #111;
+        }
+
+        [data-theme="dark"] .logo-badge {
+            background: #f4f4f4;
+            border-color: #111;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-mono);
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1.6;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 80px 40px;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-            cursor: pointer;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s ease;
-        }
-
-        a:hover {
-            border-bottom: 1px solid var(--text-color);
-        }
-
-        .container {
-            width: 100%;
-            max-width: var(--max-width);
+            background-color: #ffffff;
+            font-family: var(--font-serif);
+            color: var(--ink-black);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        header {
-            margin-bottom: 40px;
+        
+        .status-bar {
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            display: flex;
+            gap: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            z-index: 50;
+            pointer-events: none;
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+            pointer-events: auto;
+            text-decoration: underline;
         }
 
-        .header-top {
+        .main-container {
+            position: relative;
+            width: 100%;
+            max-width: 1600px;
+            height: 100vh;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            align-items: center;
+            padding: 4rem;
+        }
+
+        .content-col {
+            padding-right: 2rem;
+            z-index: 10;
+            padding-left: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 2000px;
+            height: 100%;
+            position: relative;
+        }
+
+        
+        h1 {
+            font-size: 6rem;
+            line-height: 0.85;
+            margin: 0 0 2rem 0;
+            letter-spacing: -2px;
+            font-weight: 400;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            display: block;
+        }
+        
+        h1 .italic {
+            font-style: italic;
+            font-family: var(--font-serif);
+            margin-left: 2rem;
+        }
+
+        p.lead {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            font-family: var(--font-mono);
+            letter-spacing: -0.5px;
+            color: #000;
+            border-left: 2px solid #000;
+            padding-left: 1.5rem;
+            text-align: justify;
+        }
+
+        
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #fff;
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-radius: 0;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-weight: bold;
+            border: 2px solid #000;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 500px;
+            border-top: 2px solid #000;
+            padding-top: 2rem;
+        }
+
+        .spec-item h4 {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem;
+            font-family: var(--font-serif);
+            border-bottom: 1px solid #000;
+            padding-bottom: 0.2rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .spec-item p {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        
+        .footer-bar {
+            position: absolute;
+            bottom: 2rem;
+            left: 4rem;
+            right: 4rem;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 40px;
-        }
-
-        .name-title {
-            font-size: 24px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .header-meta {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            justify-content: flex-start;
-        }
-
-        .meta-stamp {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
-            font-size: 11px;
-            opacity: 0.6;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid var(--border-color);
-            margin: 40px 0;
-        }
-
-        section {
-            margin-bottom: 40px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: #555;
+            z-index: 10;
+            pointer-events: none;
         }
 
         
-        .visual-separator {
-            width: 20px;
-            height: 1px;
-            background-color: var(--text-color);
-            margin-bottom: 20px;
-            opacity: 0.3;
+        .scene {
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(-15deg) rotateX(5deg);
+            transition: transform 0.1s ease-out;
         }
 
-        .intro-text {
-            font-size: 14px;
-            max-width: 600px;
-            margin-bottom: 30px;
+        .computer-unit {
+            position: relative;
+            width: 360px;
+            height: 440px;
+            transform-style: preserve-3d;
         }
 
-        .u-red {
-            color: var(--accent-color);
+        .face {
+            position: absolute;
+            background: var(--beige-main);
+            border: 2px solid #000; 
         }
 
-        
-        .status-container {
+        .front {
+            width: 360px;
+            height: 440px;
+            transform: translateZ(100px);
+            background: #fff;
             display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .now-playing {
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 12px;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            width: fit-content;
-            font-size: 11px;
-            flex: 1;
-            min-width: 250px;
-            max-width: 350px;
+            padding-top: 40px;
         }
 
-        .album-art {
-            width: 40px;
-            height: 40px;
-            background-color: #f0f0f0;
+        .back {
+            width: 360px;
+            height: 440px;
+            transform: translateZ(-100px) rotateY(180deg);
+            background: var(--beige-dark);
+        }
+
+        .left {
+            width: 200px;
+            height: 440px;
+            transform: rotateY(-90deg) translateZ(100px);
+            background: #f8f8f8;
+            border-left: 2px solid #000;
+        }
+
+        .right {
+            width: 200px;
+            height: 440px;
+            transform: rotateY(90deg) translateZ(260px);
+            background: #e8e8e8;
+            border-right: 2px solid #000;
+        }
+
+        .top {
+            width: 360px;
+            height: 200px;
+            transform: rotateX(90deg) translateZ(100px);
+            background: #fff;
+            border-top: 2px solid #000;
+        }
+
+        .bottom {
+            width: 360px;
+            height: 200px;
+            transform: rotateX(-90deg) translateZ(340px);
+            background: #ccc;
+            box-shadow: 0 50px 80px rgba(0,0,0,0.2); 
+        }
+
+        .screen-inset {
+            width: 280px;
+            height: 220px;
+            background: #e0e0e0;
+            border: 2px solid #000;
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 30px;
             position: relative;
-            overflow: hidden;
         }
 
-        .album-art img {
+        .crt {
+            width: 260px;
+            height: 200px;
+            background: var(--gradient-sim);
+            border-radius: 40px; 
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            border: 2px solid #000;
+        }
+
+        .crt::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        
+        .crt-ui {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            position: relative;
+        }
+
+        
+        .horizon-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            z-index: 1;
+        }
+        
+        .hud-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            z-index: 2;
+        }
+        
+        .hud-center::after {
+            content: '+';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 20px;
+            font-family: monospace;
+        }
+
+        .altimeter {
+            position: absolute;
+            right: 10px;
+            top: 20px;
+            bottom: 20px;
+            width: 20px;
+            border-left: 2px solid #fff;
+            z-index: 2;
+        }
+
+        .altimeter::before {
+            content: 'ALT';
+            position: absolute;
+            top: -15px;
+            right: 0;
+            color: #fff;
+            font-size: 8px;
+            font-family: var(--font-mono);
+        }
+
+        .alt-tick {
+            width: 5px;
+            height: 1px;
+            background: #fff;
+            margin-bottom: 5px;
+        }
+
+        
+        .window-music {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: #fff;
+            border: 2px solid #000;
+            padding: 4px;
+            width: 140px;
+            z-index: 10;
+            font-family: var(--font-mono);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .win-title {
+            background: #000;
+            color: #fff;
+            font-size: 8px;
+            padding: 2px 4px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
         }
 
         .track-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .status-indicator {
-            text-transform: uppercase;
             font-size: 9px;
-            letter-spacing: 1px;
-            opacity: 0.5;
-            margin-bottom: 2px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            line-height: 1.2;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .track-artist {
+            font-size: 8px;
+            color: #555;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .pulse {
-            width: 4px;
+        .progress-bar {
             height: 4px;
-            background: #1DB954; 
-            border-radius: 50%;
+            background: #eee;
+            margin-top: 4px;
+            border: 1px solid #000;
+            position: relative;
         }
-
-        .track-name {
-            font-weight: 700;
+        
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #000;
         }
-
-        .artist-name {
-            opacity: 0.7;
-        }
-
-        footer {
-            margin-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .ref-id {
-            font-size: 10px;
-            opacity: 0.3;
-        }
-
-        @media (max-width: 600px) {
-            .header-top {
-                flex-direction: column;
-                gap: 20px;
-            }
-            footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 40px;
-            }
-        }
-
-        .theme-toggle {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 2px 6px;
+        
+        
+        .game-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
             font-family: var(--font-mono);
             font-size: 10px;
-            cursor: pointer;
-            text-transform: uppercase;
-            margin-top: 5px;
-            transition: all 0.2s ease;
+            text-shadow: 1px 1px 0 #000;
+            z-index: 10;
         }
 
-        .theme-toggle:hover {
-            background-color: var(--text-color);
-            color: var(--bg-color);
+
+        
+        .floppy-slot {
+            width: 140px;
+            height: 8px;
+            background: #000;
+            margin-left: 100px; 
+            position: relative;
+        }
+        
+        .logo-badge {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 24px;
+            height: 24px;
+            background: #000;
+            border: 1px solid #fff;
+            transform: rotate(45deg);
+        }
+        
+        
+        .sticker-text {
+            position: absolute;
+            padding: 4px 8px;
+            background: #fff;
+            color: #000;
+            font-family: var(--font-mono);
+            font-size: 8px;
+            line-height: 1;
+            border: 1px solid #000;
+            bottom: 80px;
+            left: 40px;
+            transform: translateZ(101px) rotate(-5deg);
+            box-shadow: 2px 2px 0 #000;
+            z-index: 20;
         }
 
-        .weather-info {
-            font-size: 10px;
-            opacity: 0.8;
+        .sticker-ref {
+            position: absolute;
+            padding: 2px 4px;
+            background: #000;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 6px;
+            bottom: 60px;
+            right: 40px;
+            transform: translateZ(101px) rotate(2deg);
+        }
+
+        .grill {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            width: 40px;
+            height: 20px;
+        }
+        .vent {
+            background: #000;
+        }
+
+        
+        .keyboard-assembly {
+            position: absolute;
+            width: 360px;
+            height: 140px;
+            bottom: -118px;
+            transform-style: preserve-3d;
+            transform-origin: top center;
+            --kb-angle: 66deg;
+            transform: translateZ(164px) rotateX(var(--kb-angle));
+            --kb-thickness: 18px;
+        }
+
+        .kb-base {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border: 2px solid #000;
+            transform: translateZ(calc(var(--kb-thickness) / 2));
+            overflow: hidden;
+        }
+
+        .kb-front, .kb-back {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: var(--kb-thickness);
+            background: #fff;
+            border: 1px solid #000;
+        }
+
+        .kb-front {
+            bottom: 0;
+            background: #e0e0e0;
+            transform-origin: bottom center;
+            transform: translateZ(calc(var(--kb-thickness) / 2)) rotateX(90deg);
+        }
+
+        .kb-back {
+            top: 0;
+            transform-origin: top center;
+            transform: translateZ(calc(var(--kb-thickness) / 2)) rotateX(-90deg);
+        }
+
+        .kb-left, .kb-right {
+            position: absolute;
+            top: 0;
+            width: var(--kb-thickness);
+            height: 100%;
+            background: #eee;
+            border: 1px solid #000;
+        }
+
+        .kb-left {
+            left: 0;
+            transform-origin: left center;
+            transform: translateZ(calc(var(--kb-thickness) / 2)) rotateY(90deg);
+        }
+
+        .kb-right {
+            right: 0;
+            transform-origin: right center;
+            transform: translateZ(calc(var(--kb-thickness) / 2)) rotateY(-90deg);
+        }
+
+        .kb-shadow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: #000;
+            opacity: 0.1;
+            transform-origin: top center;
+            transform: rotateX(calc(-90deg - var(--kb-angle))) translateZ(20px);
+            box-shadow: 0 40px 70px rgba(0,0,0,0.25);
+            pointer-events: none;
+        }
+
+        .keys-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 4px;
+            padding: 15px;
+            transform: translateZ(8px);
+            transform-style: preserve-3d;
+        }
+
+        .key {
+            height: 27px;
+            background: #fff;
+            border: 1px solid #000;
+            box-shadow: 2px 2px 0 #000;
+            transform: translateZ(1px);
+        }
+        
+        .key.space {
+            grid-column: span 5;
+        }
+        .key.wide {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 1100px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+                height: auto;
+                padding: 6rem 2rem 2rem;
+                overflow-y: auto;
+            }
+            .content-col {
+                padding: 0;
+                margin-bottom: 4rem;
+                text-align: center;
+                align-items: center;
+            }
+            h1 {
+                font-size: 4rem;
+                text-align: center;
+            }
+            p.lead {
+                border-left: none;
+                border-top: 2px solid #000;
+                padding-top: 1rem;
+                margin: 0 auto 2rem;
+                text-align: center;
+            }
+            .specs-grid {
+                margin: 0 auto;
+            }
+            .scene {
+                transform: scale(0.8) rotateY(-15deg) rotateX(5deg);
+            }
+            .status-bar {
+                top: 1rem;
+                right: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-end;
+            }
+            .footer-bar {
+                position: static;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+                margin-top: 4rem;
+                padding-bottom: 2rem;
+            }
         }
     </style>
 </head>
-<body vid="6">
+<body vid="10">
 
-    <div class="container" vid="7">
-        <header vid="8">
-            <div class="header-top" vid="9">
-                <h1 class="name-title" vid="10">
-                    RAAJ AHIABLE
-                </h1>
-                <div class="header-meta" vid="11">
-                    <div class="meta-stamp" vid="12">
-                        <div id="weather" class="weather-info">WTHR: LOADING...</div>
-                        <button id="theme-toggle" class="theme-toggle" vid="theme-btn">[ THEME ]</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="intro-text" vid="16">
-                I am a Software Engineer and Partner at <a href="https://globaliconsagency.com" target="_blank">Global Icons</a>, a software engineering startup in Accra, Ghana, where I lead our engineering team. My work is centered on architecting and delivering large-scale <span class="u-red" vid="17">distributed systems</span> for complex, high-stakes environments. Over the past few years, we have shipped a number of important systems nationwide.
-            </div>
-
-            <div class="status-container">
-                <div class="now-playing" id="music-container" vid="18">
-                    <div class="album-art" vid="19">
-                        <img id="music-art" src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&amp;fit=crop&amp;q=80&amp;w=40&amp;h=40" alt="Album Art" vid="20">
-                    </div>
-                    <div class="track-info" vid="21">
-                        <div class="status-indicator" id="music-status" vid="22"><span class="pulse" id="music-pulse" vid="23"></span> Now Listening</div>
-                        <div class="track-name" id="track-name" vid="24">STATION_SILENT</div>
-                        <div class="artist-name" id="artist-name" vid="25">WAITING_FOR_DATA</div>
-                    </div>
-                </div>
-
-                <div class="now-playing" vid="gaming-status">
-                    <div class="album-art" vid="game-art">
-                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&amp;fit=crop&amp;q=80&amp;w=40&amp;h=40" alt="Game Art" vid="game-img">
-                    </div>
-                    <div class="track-info" vid="game-info">
-                        <div class="status-indicator" vid="game-status-ind"><span class="pulse" style="background: #ff0000;" vid="game-pulse"></span> Now Playing</div>
-                        <div class="track-name" vid="game-name">Aces of Thunder</div>
-                        <div class="artist-name" vid="game-platform">Flight Simulator</div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <hr vid="26">
-
-        <section vid="27">
-            <div class="visual-separator" vid="28"></div>
-            <p vid="29" style="max-width: 600px; margin-bottom: 20px;">
-                Outside of work, I have varying interest in history specifically World War II, archaeology, astronomy and industrial design. Recently, this has grown into a specific focus on World War era aircraft 
-                and the tactics of aerial combat. I am an avid gamer and currently spend some of my time in the flight simulation community, specifically flying vintage fighter planes in Aces of Thunder. I have a long-term goal of eventually transitioning from flight simulators to piloting a Cessna in the real world.
-            </p>
-        </section>
-
-        <hr vid="30">
-
-        <footer class="footer" vid="21">
-            <div class="ref-id" vid="22">REF: 0X-F2-99-A1</div>
-            <div class="loc-meta" style="font-size: 9px; opacity: 0.6; margin-top: 4px;">LOC: 5.6037° N, 0.1870° W</div>
-            <div class="contact-links" vid="23">
-                <a href="mailto:raaj@ahiable.com" vid="24">/EMAIL</a>
-                <a href="https://github.com/coloredlambda" vid="25">/GITHUB</a>
-                <a href="#" vid="26">/LINKEDIN</a>
-            </div>
-        </footer>
+    
+    <div class="status-bar" vid="11">
+        <span id="weather-status" vid="12">WTHR: LOADING...</span>
+        <span id="theme-toggle" class="theme-toggle" vid="13">[THEME]</span>
     </div>
 
-    <script vid="script-logic">
-        // Theme Logic
-        const toggleBtn = document.getElementById('theme-toggle');
+    <div class="main-container" vid="14">
         
+        
+        <div class="content-col" vid="15">
+            <h1 vid="16">
+                <span vid="17">Raaj</span>
+                <span class="italic" vid="18">Ahiable.</span>
+            </h1>
+            
+            <p class="lead" vid="19">
+                I am a Software Engineer and Partner at Global Icons, a software engineering startup in Accra, Ghana, where I lead our engineering team. My work is centered on architecting and delivering large-scale distributed systems for complex, high-stakes environments. Over the past few years, we have shipped a number of important systems nationwide.
+            </p>
+            
+            <div class="cta-group" vid="20">
+                <a href="mailto:raaj@ahiable.com" class="btn" vid="21">/EMAIL</a>
+                <a href="https://github.com/coloredlambda" class="btn" vid="22">/GITHUB</a>
+                <a href="#" class="btn" vid="23">/LINKEDIN</a>
+            </div>
+
+            <div class="specs-grid" vid="24">
+                <div class="spec-item" vid="25">
+                    <h4 vid="26">Role</h4>
+                    <p vid="27">Partner @ Global Icons</p>
+                </div>
+                <div class="spec-item" vid="28">
+                    <h4 vid="29">Location</h4>
+                    <p vid="30">Accra, Ghana</p>
+                </div>
+                <div class="spec-item" vid="31">
+                    <h4 vid="32">Focus</h4>
+                    <p vid="33">Distributed Systems, WWII History, Arch.</p>
+                </div>
+                <div class="spec-item" vid="34">
+                    <h4 vid="35">Goal</h4>
+                    <p vid="36">Piloting a Cessna</p>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="product-col" vid="37">
+            <div class="scene" id="scene" vid="38">
+                <div class="computer-unit" vid="39">
+                    
+                    <div class="face front" vid="40">
+                        <div class="screen-inset" vid="41">
+                            <div class="crt" vid="42">
+                                
+                                <div class="crt-ui" vid="43">
+                                    <div class="game-overlay" vid="44">
+                                        RUNNING: Aces of Thunder<br vid="45">
+                                        SIMULATION: ACTIVE
+                                    </div>
+                                    
+                                    
+                                    <div class="horizon-line" vid="46"></div>
+                                    <div class="hud-center" vid="47"></div>
+                                    <div class="altimeter" vid="48">
+                                        <div class="alt-tick" vid="49"></div>
+                                        <div class="alt-tick" vid="50"></div>
+                                        <div class="alt-tick" vid="51"></div>
+                                        <div class="alt-tick" vid="52"></div>
+                                        <div class="alt-tick" vid="53"></div>
+                                        <div class="alt-tick" vid="54"></div>
+                                    </div>
+
+                                    
+                                    <div class="window-music" vid="55">
+                                        <div class="win-title" vid="56">
+                                            <span vid="57">Winamp</span>
+                                            <span id="music-status" vid="58">X</span>
+                                        </div>
+                                        <div id="track-name" class="track-info" vid="59">LOADING...</div>
+                                        <div id="artist-name" class="track-artist" vid="60">PLEASE WAIT</div>
+                                        <div class="progress-bar" vid="61">
+                                            <div id="progress-fill" class="progress-fill" vid="62"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="logo-badge" vid="63"></div>
+                        <div class="floppy-slot" vid="64"></div>
+                        
+                        
+                        <div class="sticker-text" vid="65">MACHINE<br vid="66">INTELLIGENCE</div>
+                        <div class="sticker-ref" vid="67">ID: RA-88</div>
+                        
+                        <div class="grill" vid="68">
+                            <div class="vent" vid="69"></div><div class="vent" vid="70"></div><div class="vent" vid="71"></div><div class="vent" vid="72"></div>
+                            <div class="vent" vid="73"></div><div class="vent" vid="74"></div><div class="vent" vid="75"></div><div class="vent" vid="76"></div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="face back" vid="77"></div>
+                    <div class="face left" vid="78"></div>
+                    <div class="face right" vid="79"></div>
+                    <div class="face top" vid="80"></div>
+                    <div class="face bottom" vid="81"></div>
+                    
+                    
+                    <div class="keyboard-assembly" vid="82">
+                        <div class="kb-base" vid="83">
+                            <div class="keys-grid" vid="84">
+                                <div class="key" vid="85"></div><div class="key" vid="86"></div><div class="key" vid="87"></div><div class="key" vid="88"></div>
+                                <div class="key" vid="89"></div><div class="key" vid="90"></div><div class="key" vid="91"></div><div class="key" vid="92"></div>
+                                <div class="key" vid="93"></div><div class="key" vid="94"></div><div class="key" vid="95"></div><div class="key" vid="96"></div>
+                                <div class="key wide" vid="97"></div><div class="key" vid="98"></div><div class="key" vid="99"></div><div class="key" vid="100"></div>
+                                <div class="key" vid="101"></div><div class="key" vid="102"></div><div class="key" vid="103"></div><div class="key" vid="104"></div>
+                                <div class="key" vid="105"></div><div class="key wide" vid="106"></div>
+                                <div class="key" vid="107"></div><div class="key" vid="108"></div><div class="key space" vid="109"></div><div class="key" vid="110"></div><div class="key" vid="111"></div><div class="key" vid="112"></div>
+                            </div>
+                        </div>
+                        <div class="kb-front" vid="113"></div>
+                        <div class="kb-back" vid="114"></div>
+                        <div class="kb-left" vid="115"></div>
+                        <div class="kb-right" vid="116"></div>
+                        <div class="kb-shadow" vid="117"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <div class="footer-bar" vid="118">
+        <span vid="119">REF: 0X-FZ-99-A1</span>
+        <span vid="120">LOC: 5.6037° N, 0.1870° W</span>
+    </div>
+
+    <script vid="121">
+        
+        const container = document.querySelector('.main-container');
+        const scene = document.querySelector('.scene');
+        
+        container.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const rotateX = 5 + (y - 0.5) * 10;
+            const rotateY = -15 + (x - 0.5) * 10;
+            
+            scene.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        });
+
+        
+        const altTicks = document.querySelectorAll('.alt-tick');
+        let tickOffset = 0;
+        
+        setInterval(() => {
+            tickOffset += 1;
+            altTicks.forEach((tick, i) => {
+                const pos = (i * 10 + tickOffset) % 60;
+                tick.style.transform = `translateY(${pos}px)`;
+            });
+        }, 50);
+
+        
+        const progress = document.getElementById('progress-fill');
+        let progressWidth = 60;
+        setInterval(() => {
+            progressWidth += 0.5;
+            if(progressWidth > 100) progressWidth = 0;
+            progress.style.width = progressWidth + '%';
+        }, 100);
+
+        // API Integration Logic
+        const weatherStatus = document.getElementById('weather-status');
+        const trackName = document.getElementById('track-name');
+        const artistName = document.getElementById('artist-name');
+        const musicStatus = document.getElementById('music-status');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Theme Logic
         function applyTheme(theme) {
             if (theme) {
                 document.documentElement.setAttribute('data-theme', theme);
@@ -342,23 +914,19 @@
             }
         }
 
-        // Initialize from localStorage (manual override)
         const storedTheme = localStorage.getItem('theme');
         if (storedTheme) {
             applyTheme(storedTheme);
         }
 
-        // Manual toggle logic
-        toggleBtn.addEventListener('click', () => {
+        themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
             let newTheme;
             if (!currentTheme) {
-                // Currently following system, switch to the opposite of system
                 newTheme = systemIsDark ? 'light' : 'dark';
             } else {
-                // Manually overridden, switch to the other manual theme
                 newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             }
             
@@ -366,36 +934,25 @@
             localStorage.setItem('theme', newTheme);
         });
 
-        // Weather Logic (Accra, Ghana)
+        // Weather Logic
         async function fetchWeather() {
-            const weatherDiv = document.getElementById('weather');
             try {
-                // Using wttr.in for a simple, no-key-required weather API
-                // Adding ?m for metric units (Celsius)
                 const response = await fetch('https://wttr.in/Accra?m&format=%t+%C');
                 if (response.ok) {
                     const data = await response.text();
-                    weatherDiv.innerText = `WTHR: ${data.toUpperCase()}`;
+                    weatherStatus.innerText = `WTHR: ${data.toUpperCase()}`;
                 } else {
-                    weatherDiv.innerText = 'WTHR: UNAVAILABLE';
+                    weatherStatus.innerText = 'WTHR: UNAVAILABLE';
                 }
             } catch (error) {
-                weatherDiv.innerText = 'WTHR: OFFLINE';
+                weatherStatus.innerText = 'WTHR: OFFLINE';
             }
         }
 
-        fetchWeather();
-
-        // Music Logic (Proxy via Render)
-        const PROXY_URL = 'https://coloredlambda-github-io.onrender.com/api/now-playing'; // Update this once deployed
+        // Music Logic
+        const PROXY_URL = 'https://coloredlambda-github-io.onrender.com/api/now-playing';
 
         async function fetchNowPlaying() {
-            const trackName = document.getElementById('track-name');
-            const artistName = document.getElementById('artist-name');
-            const musicArt = document.getElementById('music-art');
-            const musicPulse = document.getElementById('music-pulse');
-            const musicStatus = document.getElementById('music-status');
-
             try {
                 const response = await fetch(PROXY_URL);
                 if (response.ok) {
@@ -403,14 +960,11 @@
                     
                     trackName.innerText = data.name.toUpperCase();
                     artistName.innerText = data.artist.toUpperCase();
-                    if (data.image) musicArt.src = data.image;
                     
                     if (data.nowPlaying) {
-                        musicPulse.style.display = 'inline-block';
-                        musicStatus.innerHTML = '<span class="pulse" id="music-pulse"></span> NOW LISTENING';
+                        musicStatus.innerText = '▶';
                     } else {
-                        musicPulse.style.display = 'none';
-                        musicStatus.innerText = 'LAST PLAYED';
+                        musicStatus.innerText = 'X';
                     }
                 }
             } catch (error) {
@@ -418,8 +972,11 @@
             }
         }
 
+        fetchWeather();
         fetchNowPlaying();
-        // Refresh every 30 seconds
-        setInterval(fetchNowPlaying, 30000);
+        setInterval(fetchWeather, 600000); // 10 mins
+        setInterval(fetchNowPlaying, 30000); // 30 secs
     </script>
+
+
 </body></html>
