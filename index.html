@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAAJ // PROFILE</title>
-    <meta name="description" content="Raaj Ahiable — software engineer from Keta, Ghana. Distributed systems, the arts, tech toys, and music.">
+    <meta name="description" content="Raaj Ahiable, software engineer from Keta, Ghana. Distributed systems, the arts, tech toys, and music.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <noscript><style>#boot { display: none; }</style></noscript>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -97,6 +98,42 @@
             width: 0%;
             background: var(--accent-color);
             z-index: 100;
+        }
+
+        /* Boot sequence overlay */
+        #boot {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-color);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.45s ease;
+        }
+
+        .boot-inner {
+            font-size: 11px;
+            line-height: 2.1;
+            letter-spacing: 0.5px;
+            min-width: 300px;
+        }
+
+        .boot-line {
+            opacity: 0;
+            white-space: pre;
+        }
+
+        .boot-line.on {
+            opacity: 0.85;
+        }
+
+        .boot-line .ok {
+            color: var(--accent-color);
+        }
+
+        .boot-bar {
+            font-variant-numeric: tabular-nums;
         }
 
         .container {
@@ -223,6 +260,50 @@
             margin-bottom: 20px;
         }
 
+        /* Pursuits — labeled dossier rows */
+        .pursuits {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .pursuit {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 24px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .pursuit:hover {
+            background-color: var(--faint);
+        }
+
+        .pursuit-key {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            padding-top: 2px;
+        }
+
+        .pursuit:hover .pursuit-key {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .pursuit-body {
+            max-width: 560px;
+        }
+
+        @media (max-width: 600px) {
+            .pursuit {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+        }
+
         /* Reveal-on-scroll */
         .reveal {
             opacity: 0;
@@ -328,6 +409,7 @@
             position: relative;
             border: 1px solid var(--border-color);
             padding: 10px;
+            cursor: crosshair;
         }
 
         .map-frame .tick {
@@ -508,6 +590,17 @@
 </head>
 <body>
 
+    <div id="boot" aria-hidden="true">
+        <div class="boot-inner">
+            <div class="boot-line">RAAJ.SYS // PROFILE LOADER</div>
+            <div class="boot-line">&gt; INIT PROFILE ............. <span class="ok">OK</span></div>
+            <div class="boot-line">&gt; UPLINK ACCRA 5.6037N ..... <span class="ok">OK</span></div>
+            <div class="boot-line">&gt; ORIGIN TRACE: KETA 5.9181N</div>
+            <div class="boot-line">&gt; MOUNT /ARTS /TOYS /MUSIC . <span class="ok">OK</span></div>
+            <div class="boot-line boot-bar">[<span id="boot-blocks">░░░░░░░░░░░░░░░░░░░░</span>] <span id="boot-pct">0</span>%</div>
+        </div>
+    </div>
+
     <div class="progress-bar" id="progress-bar"></div>
 
     <div class="container">
@@ -525,9 +618,8 @@
 
             <nav class="section-nav">
                 <a href="#origin">[01] ORIGIN</a>
-                <a href="#interests">[02] INTERESTS</a>
-                <a href="#arts">[03] THE ARTS</a>
-                <a href="#offhours">[04] OFF HOURS</a>
+                <a href="#throughline">[02] THE THROUGH-LINE</a>
+                <a href="#pursuits">[03] PURSUITS</a>
             </nav>
 
             <div class="intro-text">
@@ -567,10 +659,13 @@
             <div class="origin-grid">
                 <div>
                     <p class="body-copy">
-                        I am Anlo-Ewe, from <span class="u-red">Keta</span> — a town in the Volta Region of Ghana built on a narrow strip of sand between two waters. To the north lies the Keta Lagoon, the largest in the country. To the south, the open Gulf of Guinea. In places, the land between them is only a few hundred metres wide.
+                        I am Anlo-Ewe, from <span class="u-red">Keta</span>, a town in the Volta Region of Ghana built on a narrow strip of sand between two waters. To the north lies the Keta Lagoon, the largest in the country. To the south, the open Gulf of Guinea. In places, the land between them is only a few hundred metres wide.
                     </p>
                     <p class="body-copy">
-                        Living between a lagoon and a sea teaches you about margins. The Atlantic has claimed whole streets of old Keta; the town rebuilt behind the sea defence and carried on. I think about that when I build systems — everything important runs on a narrow strip of ground, held by people who refuse to stop maintaining it.
+                        The sea is not gentle here. The Atlantic has swallowed whole streets of old Keta: homes, a church, a colonial fort. And still the town stayed. People rebuilt behind the sea defence, fished the same waters that took the land, and made full, dignified lives out of a sliver of sand and whatever it offered. That refusal to be diminished, that talent for <span class="u-red">making much out of little</span>, is the first thing Keta taught me.
+                    </p>
+                    <p class="body-copy">
+                        It shaped how I create. Keta taught me that constraint is not the enemy of beauty but the condition for it. You can take the little you are given and shape something worth keeping. As an engineer I am rarely handed abundance; I am handed limits, and the work is to build something elegant and durable inside them. That instinct isn't really mine. It belongs to the people who kept living, and kept making, on a strip of sand the ocean wanted back.
                     </p>
                 </div>
                 <div>
@@ -599,7 +694,7 @@
                         </svg>
                     </div>
                     <div class="map-caption">
-                        <span>FIG. 01 — THE SANDBAR</span>
+                        <span>FIG. 01 / THE SANDBAR</span>
                         <span>5.9181° N, 0.9920° E</span>
                     </div>
                 </div>
@@ -608,33 +703,54 @@
 
         <hr>
 
-        <section id="interests" class="reveal">
-            <div class="section-label"><span class="idx">002</span> / INTERESTS</div>
+        <section id="throughline" class="reveal">
+            <div class="section-label"><span class="idx">002</span> / THE THROUGH-LINE</div>
             <div class="visual-separator"></div>
             <p class="body-copy">
-                Outside of work, I have varying interest in history specifically World War II, archaeology, astronomy and industrial design. Recently, this has grown into a specific focus on World War era aircraft
-                and the tactics of aerial combat. I am an avid gamer and currently spend some of my time in the flight simulation community, specifically flying vintage fighter planes in Aces of Thunder. I have a long-term goal of eventually transitioning from flight simulators to piloting a Cessna in the real world.
+                Before any of this was code, it was words and music. I was the kid lost in <span class="u-red">poems, books, and history</span>, and a serious World War II nerd: the kind who can place the decade of a photograph from the grain and the uniforms. I was pulled toward all of it long before I knew what an engineer was. That came later, and it turned out to be the same instinct in different clothes: the urge to take something formless and give it a shape that works.
+            </p>
+            <p class="body-copy">
+                It is why I keep returning to the <span class="u-red">Bauhaus</span>: the conviction that how a thing is made is inseparable from what it is, that craft and function are one argument and not two. I build distributed systems for a living, but I am chasing the same thing a good poem or a clean typeface chases: nothing decorative, nothing missing, the whole thing looking inevitable once it exists.
             </p>
         </section>
 
         <hr>
 
-        <section id="arts" class="reveal">
-            <div class="section-label"><span class="idx">003</span> / THE ARTS</div>
+        <section id="pursuits" class="reveal">
+            <div class="section-label"><span class="idx">003</span> / PURSUITS</div>
             <div class="visual-separator"></div>
-            <p class="body-copy">
-                I carry a standing love for the arts. I am drawn to work where the <span class="u-red">craft is visible</span> — painting, sculpture, photography, architecture, and the design of everyday objects. Engineering and art solve the same problem from opposite ends: both are about making deliberate choices under constraint, and the best of either discipline looks inevitable once it exists.
-            </p>
-        </section>
-
-        <hr>
-
-        <section id="offhours" class="reveal">
-            <div class="section-label"><span class="idx">004</span> / OFF HOURS</div>
-            <div class="visual-separator"></div>
-            <p class="body-copy">
-                My free time splits between two ongoing collections. The first is <span class="u-red">tech toys</span> — small machines and gadgets that don't strictly need to exist, built and tinkered with for the joy of it. The second is <span class="u-red">music</span> — I collect it deliberately, hunting down albums and recordings across genres and decades. The "now listening" signal at the top of this page is a live feed from that habit.
-            </p>
+            <div class="pursuits">
+                <div class="pursuit">
+                    <div class="pursuit-key">Art &amp; Design</div>
+                    <div class="pursuit-body">
+                        I consume art constantly: painting, photography, architecture, the design of everyday objects. I'm drawn to work where the craft is visible. The Bauhaus is the lens; everything else I look at gets measured against it.
+                    </div>
+                </div>
+                <div class="pursuit">
+                    <div class="pursuit-key">Gaming</div>
+                    <div class="pursuit-body">
+                        The constant since childhood. Lately I live in the flight-simulation community, flying vintage fighters in Aces of Thunder, with a standing goal of one day trading the simulator for a real Cessna.
+                    </div>
+                </div>
+                <div class="pursuit">
+                    <div class="pursuit-key">Tech Toys</div>
+                    <div class="pursuit-body">
+                        I build small machines and gadgets that don't strictly need to exist, made for the joy of the build. They live at <a href="https://toys.ahiable.com" target="_blank" rel="noopener">toys.ahiable.com</a>.
+                    </div>
+                </div>
+                <div class="pursuit">
+                    <div class="pursuit-key">Music</div>
+                    <div class="pursuit-body">
+                        I collect deliberately, hunting albums and recordings across genres and decades. The "now listening" signal at the top of this page is a live feed from that habit.
+                    </div>
+                </div>
+                <div class="pursuit">
+                    <div class="pursuit-key">The RAV4</div>
+                    <div class="pursuit-body">
+                        My newest rabbit hole: tweaking my RAV4, learning the car by taking it apart and putting it back slightly better than I found it. Same loop as everything else here: understand it, then improve it.
+                    </div>
+                </div>
+            </div>
         </section>
 
         <hr>
@@ -687,12 +803,13 @@
         });
 
         // Name scramble / decode effect
-        (function scrambleName() {
+        const SCRAMBLE_CHARS = '!<>-_\\/[]{}—=+*^?#0123456789ABCDEF';
+
+        function scrambleName() {
             const el = document.getElementById('name-scramble');
             const target = el.dataset.text;
             if (REDUCED_MOTION) { el.textContent = target; return; }
 
-            const CHARS = '!<>-_\\/[]{}—=+*^?#0123456789ABCDEF';
             let frame = 0;
             const totalFrames = 36;
 
@@ -704,7 +821,7 @@
                     if (i < locked) {
                         out += target[i];
                     } else {
-                        out += CHARS[Math.floor(Math.random() * CHARS.length)];
+                        out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
                     }
                 }
                 el.textContent = out;
@@ -716,6 +833,87 @@
                 }
             }
             tick();
+        }
+
+        // Boot sequence — plays once per session, skippable with any key/click
+        (function boot() {
+            const overlay = document.getElementById('boot');
+
+            if (REDUCED_MOTION) {
+                overlay.remove();
+                scrambleName();
+                return;
+            }
+
+            const lines = overlay.querySelectorAll('.boot-line');
+            const blocksEl = document.getElementById('boot-blocks');
+            const pctEl = document.getElementById('boot-pct');
+            const TOTAL_BLOCKS = 20;
+            let finished = false;
+            const timers = [];
+
+            function finish() {
+                if (finished) return;
+                finished = true;
+                timers.forEach(clearTimeout);
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.remove(), 450);
+                scrambleName();
+                window.removeEventListener('keydown', finish);
+                window.removeEventListener('click', finish);
+            }
+
+            window.addEventListener('keydown', finish);
+            window.addEventListener('click', finish);
+
+            // Reveal lines one by one
+            lines.forEach((line, i) => {
+                timers.push(setTimeout(() => line.classList.add('on'), 90 + i * 140));
+            });
+
+            // Fill the progress bar after lines are in
+            const barStart = 90 + lines.length * 140;
+            for (let b = 1; b <= TOTAL_BLOCKS; b++) {
+                timers.push(setTimeout(() => {
+                    if (finished) return;
+                    blocksEl.textContent = '█'.repeat(b) + '░'.repeat(TOTAL_BLOCKS - b);
+                    pctEl.textContent = Math.round((b / TOTAL_BLOCKS) * 100);
+                }, barStart + b * 28));
+            }
+
+            timers.push(setTimeout(finish, barStart + TOTAL_BLOCKS * 28 + 280));
+        })();
+
+        // Scramble-on-hover for nav + contact links
+        (function hoverScramble() {
+            if (REDUCED_MOTION) return;
+            document.querySelectorAll('.section-nav a, .contact-links a').forEach(el => {
+                const original = el.textContent;
+                let running = false;
+                el.addEventListener('mouseenter', () => {
+                    if (running) return;
+                    running = true;
+                    let frame = 0;
+                    const totalFrames = 12;
+                    (function tick() {
+                        let out = '';
+                        const locked = Math.floor((frame / totalFrames) * original.length);
+                        for (let i = 0; i < original.length; i++) {
+                            const c = original[i];
+                            if (c === ' ' || i < locked) { out += c; continue; }
+                            out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+                        }
+                        el.textContent = out;
+                        frame++;
+                        if (frame <= totalFrames) {
+                            requestAnimationFrame(tick);
+                        } else {
+                            el.textContent = original;
+                            running = false;
+                        }
+                    })();
+                });
+            });
         })();
 
         // Accra clock (GMT)
